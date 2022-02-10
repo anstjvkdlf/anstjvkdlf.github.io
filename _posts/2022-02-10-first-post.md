@@ -1,5 +1,5 @@
 ---
-title:  "사내 Maria DB 설치 Routine"
+title:  "Maria DB 설치방법"
 excerpt: "OS : Red Hat Enterprise Linux Server 7.5 (Maipo)
 ODBC : unixODBC 2.3.1
 DataBase : 10.5.13-MariaDB
@@ -42,5 +42,158 @@ MariaDB-server.x86_64                 10.5.13-1.el7.centos         @mariadb
 # 3. Setting
 
 # 4. Problems
-4.1. AutoCommit 이 OFF 일 때 생기는 문제
+**4.1. AutoCommit을 OFF로 두었을 때 생기는 문제**
+***
 
+프로그램 특성 상 Transaction이 AutoCommit되지 않도록 해야할 때 [SQLSetConnectAttr](https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlsetconnectattr-function?view=sql-server-ver15) 함수에 아래와 같은 옵션을 주어, AutoCommit을 OFF할 수 있다.
+
+SQLSetConnectAttr ( *pHdbc , SQL_ATTR_AUTOCOMMIT, **SQL_AUTOCOMMIT_OFF**, 0 ) ;
+
+***
+이 옵션을 사용하면 아래와 같은 문제가 필연적으로 발생한다.
+
+세션2에서 세션1의 내용을 바꾸면 당연히 세션 1에서 바뀐내용이 적용되어야 한다.
+
+아래는 우리가 기대했던 결과이다
+
+
+~~~
+mysql session 1$ create table test (id integer unsigned primary key) engine=innodb;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql session 1$ set autocommit=1;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql session 1$ select * from test;
+Empty set (0.01 sec)
+
+  mysql session 2$ begin;
+  Query OK, 0 rows affected (0.00 sec)
+
+  mysql session 2$ insert into test values (1);
+  Query OK, 1 row affected (0.05 sec)
+
+  mysql session 2$ commit;
+  Query OK, 0 rows affected (0.00 sec)
+
+mysql session 1$ select * from test;
++----+
+| id |
++----+
+|  1 |
++----+
+1 row in set (0.00 sec)
+~~~
+
+
+만약 autocommit을 OFF 하면 어떻게 될까?
+
+세션1의 내용을 세션2에서 바꾸고 commit을 했지만, 세션 1에는 반영이 안되고있다.
+기대했던 결과가 아니다.
+
+
+~~~
+mysql session 1$ set autocommit=0;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql session 1$ select * from test;
++----+
+| id |
++----+
+|  1 |
++----+
+1 row in set (0.00 sec)
+
+  mysql session 2$ begin;
+  Query OK, 0 rows affected (0.00 sec)
+
+  mysql session 2$ insert into test values (2);
+  Query OK, 1 row affected (0.05 sec)
+
+  mysql session 2$ commit;
+  Query OK, 0 rows affected (0.00 sec)
+
+mysql session 1$ select * from test;
++----+
+| id |
++----+
+|  1 |
++----+
+1 row in set (0.00 sec)
+
+mysql session 1$ commit;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql session 1$ select * from test;
++----+
+| id |
++----+
+|  1 |
+|  2 |
++----+
+2 rows in set (0.00 sec)
+~~~
+
+이는 트랜잭션의 격리수준 (isolation level) 때문에 나타나는 현상이다.
+
+아래와 같이 트랜잭션의 격리수준을 read commited로 설정해주면 문제가 해결된다.
+
+~~~
+mysql session 1$ set autocommit=0;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql session 1$ set session transaction isolation level read committed;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql session 1$ select * from test;
++----+
+| id |
++----+
+|  1 |
+|  2 |
++----+
+2 rows in set (0.01 sec)
+
+  mysql session 2$ begin;
+  Query OK, 0 rows affected (0.00 sec)
+
+  mysql session 2$ insert into test values (3);
+  Query OK, 1 row affected (0.05 sec)
+
+  mysql session 2$ commit;
+  Query OK, 0 rows affected (0.00 sec)
+
+mysql session 1$ select * from test;
++----+
+| id |
++----+
+|  1 |
+|  2 |
+|  3 |
++----+
+3 rows in set (0.00 sec)
+~~~
+
+
+**트랜잭션의 격리수준이란?**
+- 트랜잭션이 처리 될 때, 특정 트랜잭션이 다른 트랜잭션에서 변경하거나 조회하는 데이터를 볼 수 있도록 허용할지 말지 결정하는 것이다.
+
+
+**트랜잭션의 격리수준**
+- READ UNCOMMITTED
+- READ COMMITTED
+- REPEATABLE READ
+- SERIALIZABLE
+
+Maria DB는 트랜잭션의 격리수준을 디폴트로 REPEATABLE READ 로 잡고 있다.
+~~~
+MariaDB [(none)]> SELECT @@GLOBAL.tx_isolation, @@tx_isolation;
++-----------------------+-----------------+
+| @@GLOBAL.tx_isolation | @@tx_isolation  |
++-----------------------+-----------------+
+| REPEATABLE-READ       | REPEATABLE-READ |
++-----------------------+-----------------+
+1 row in set (0.000 sec)
+~~~
+
+격리 수준이 REPEATABLE READ 일 때, **PHANTOM READ** 현상이 일어날 수 있다.
