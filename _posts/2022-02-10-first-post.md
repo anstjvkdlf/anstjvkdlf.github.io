@@ -1,9 +1,7 @@
 ---
-title:  "Maria DB 설치방법"
-excerpt: "OS : Red Hat Enterprise Linux Server 7.5 (Maipo)
-ODBC : unixODBC 2.3.1
-DataBase : 10.5.13-MariaDB
-Connector : MariaDB ODBC 3.1 Driver"
+title:  "Maria DB 설치 & 세팅 & 문제"
+excerpt: "리눅스 버전, MariaDB 버전, ODBC 버전, 환경설정
+설치 시 발생하는 문제점에 관한 자료"
 
 categories:
   - Blog
