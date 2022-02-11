@@ -76,7 +76,6 @@ yum install unixODBC-devel
 2. tar download
 tar 다운로드 https://downloads.mariadb.com/Connectors/odbc/connector-odbc-3.1.9/
 
-
 3. tar zcvf *.tar.gz
 ```
 
@@ -93,7 +92,7 @@ mysql> GRANT ALL PRIVILEGES ON *.* TO '{ID}'@'%' IDENTIFIED BY '{PWD}';
 
 ## 3.2. ODBC SETTING
 
-~~~bash
+```bash
 [nssf-opm01] root@ /etc # cat odbcinst.ini
 
 [PostgreSQL]
@@ -131,7 +130,7 @@ USER=root
 PASSWORD=.dlfndhs
 DATABASE=NSSF
 PORT=3306
-~~~
+```
 
 # 4. Problems
 ## 4.1. AutoCommit을 OFF로 두었을 때 생기는 문제
@@ -291,7 +290,7 @@ MariaDB [(none)]> SELECT @@GLOBAL.tx_isolation, @@tx_isolation;
 
 REPEATABLE READ는 아래 그림처럼 Transaction을 ID별로 구분하기 때문에 COMMIT을 제대로 해주지 않는 다면 바뀐 DB내용이 아닌 해당 Transaction ID가 가진 Snapshot 내용을 계속읽게 된다.
 
-![Repeatable Read](.././_img/Repeatable_read.png)
+![Repeatable Read](./../_img/Repeatable_read.png)
 그림출처: doooyeon.github.io
 
 ---
