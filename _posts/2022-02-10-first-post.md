@@ -40,7 +40,7 @@ MariaDB-server.x86_64                 10.5.13-1.el7.centos         @mariadb
 # 2. Install
 ## 2.1. [mariadb install]
 
-1. set Mariadb.repo
+- set Mariadb.repo
 ~~~
 [nssf-opm01] root@ /etc/yum.repos.d # vi  Mariadb.repo
 MariaDB 10.5 RedHat repository list - created 2021-06-07 05:03 UTC
@@ -122,17 +122,16 @@ PORT=3306
 # 4. Problems
 ## 4.1. AutoCommit을 OFF로 두었을 때 생기는 문제
 
-프로그램 특성 상 Transaction이 AutoCommit되지 않도록 해야할 때 [SQLSetConnectAttr](https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlsetconnectattr-function?view=sql-server-ver15) 함수에 아래와 같은 옵션을 주어, AutoCommit을 OFF할 수 있다.
+- 프로그램 특성 상 Transaction이 AutoCommit되지 않도록 해야할 때 [SQLSetConnectAttr](https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlsetconnectattr-function?view=sql-server-ver15) 함수에 아래와 같은 옵션을 주어, AutoCommit을 OFF할 수 있다.
 
 ~~~
 SQLSetConnectAttr ( *pHdbc , SQL_ATTR_AUTOCOMMIT, **SQL_AUTOCOMMIT_OFF**, 0 ) ;
 ~~~
 ***
-이 옵션을 사용하면 아래와 같은 문제가 필연적으로 발생한다.
+세션2에서 세션1의 내용을 바꾸면 당연히 세션 1에서 바뀐내용이 적용되어야 한다. 그런데 이 옵션을 사용하면 아래와 같은 문제가 필연적으로 발생한다.
 
-세션2에서 세션1의 내용을 바꾸면 당연히 세션 1에서 바뀐내용이 적용되어야 한다.
 
-아래는 우리가 기대했던 결과이다
+먼저 우리가 기대하는 결과는 아래와 같다.
 
 
 ~~~
