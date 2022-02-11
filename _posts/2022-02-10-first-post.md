@@ -38,8 +38,83 @@ MariaDB-server.x86_64                 10.5.13-1.el7.centos         @mariadb
 -rw-r--r--. 1 root root 1991882 Jan 25 15:04 mariadb-connector-odbc-3.1.15-centos7-amd64.tar.gz
 
 # 2. Install
+## **[mariadb install]**
+
+1. set Mariadb.repo
+~~~
+[nssf-opm01] root@ /etc/yum.repos.d # vi  Mariadb.repo
+MariaDB 10.5 RedHat repository list - created 2021-06-07 05:03 UTC
+http://downloads.mariadb.org/mariadb/repositories/
+[mariadb]
+name = MariaDB
+baseurl = http://yum.mariadb.org/10.5/rhel7-amd64
+  gkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+gpgcheck=1
+
+2. [nssf-opm01] root@ /etc/yum.repos.d # yum -y install MariaDB-server MariaDB-client
+
+3. systemctl enable mariadb, systemctl restart mariadb
+~~~
+## **[odbc install]**
+~~~
+1. yum install unixODBC
+yum install unixODBC-devel
+
+2. tar download
+tar 다운로드 https://downloads.mariadb.com/Connectors/odbc/connector-odbc-3.1.9/
+
+
+3. tar zcvf *.tar.gz
+~~~
 
 # 3. Setting
+
+## **[MARAIDB SETTING ]**
+$ mysql -u root {PW}
+mysql> SELECT Host,User,plugin,authentication_string FROM mysql.user;
+mysql> GRANT ALL PRIVILEGES ON *.* TO '{ID}'@'%' IDENTIFIED BY '{PWD}';
+
+## **[ODBC SETTING]**
+
+~~~
+[nssf-opm01] root@ /etc # cat odbcinst.ini
+
+[PostgreSQL]
+Description     = ODBC for PostgreSQL
+Driver          = /usr/lib/psqlodbcw.so
+Setup           = /usr/lib/libodbcpsqlS.so
+Driver64        = /usr/lib64/psqlodbcw.so
+Setup64         = /usr/lib64/libodbcpsqlS.so
+FileUsage       = 1
+
+
+[MySQL]
+Description     = ODBC for MySQL
+Driver          = /usr/lib/libmyodbc5.so
+Setup           = /usr/lib/libodbcmyS.so
+Driver64        = /usr/lib64/libmyodbc5.so
+Setup64         = /usr/lib64/libodbcmyS.so
+FileUsage       = 1
+
+[ODBC Drivers]
+MariaDB ODBC 3.1 Driver = installed
+
+[MariaDB ODBC 3.1 Driver]
+Description=MariaDB Connector/ODBC v.3.1
+Driver = /nssf/mariadb/lib64/libmaodbc.so
+#Driver = /usr/lib64/libmaodbc.so
+
+
+[nssf-opm01] root@ /etc # cat odbc.ini
+[MariaDB-server]
+Description=MariaDB server
+Driver=MariaDB ODBC 3.1 Driver
+SERVER=ipc_opm1
+USER=root
+PASSWORD=.dlfndhs
+DATABASE=NSSF
+PORT=3306
+~~~
 
 # 4. Problems
 **4.1. AutoCommit을 OFF로 두었을 때 생기는 문제**
