@@ -20,33 +20,35 @@ last_modified_at: 2020-05-25
 # 1. Version Information
 
 ## 1.1 ODBC
-~~~
-[root@sdm1 ~]# yum list installed | grep ODBC
+
+```[root@sdm1 ~] yum list installed | grep ODBC
 unixODBC.x86_64                       2.3.1-14.el7                 installed
 unixODBC-devel.x86_64                 2.3.1-14.el7                 installed
-~~~
+```
+
 
 ## 1.2. MariaDB
-~~~
-MariaDB-client.x86_64                 10.5.13-1.el7.centos         @mariadb
+
+```MariaDB-client.x86_64                 10.5.13-1.el7.centos         @mariadb
 MariaDB-common.x86_64                 10.5.13-1.el7.centos         @mariadb
 MariaDB-compat.x86_64                 10.5.13-1.el7.centos         @mariadb
 MariaDB-server.x86_64                 10.5.13-1.el7.centos         @mariadb
-~~~
+```
+
 
 ## 1.3 Connector
-~~~
-[root@sdm1 ~]# ll | grep connector
+
+```[root@sdm1 ~]# ll | grep connector
 -rw-r--r--. 1 root root 1991882 Jan 25 15:04 mariadb-connector-odbc-3.1.15-centos7-amd64.tar.gz
-~~~
+```
+
 
 # 2. Install
 ## 2.1. [mariadb install]
 
 - set Mariadb.repo
 
-~~~
-[nssf-opm01] root@ /etc/yum.repos.d # vi  Mariadb.repo
+```[nssf-opm01] root@ /etc/yum.repos.d # vi  Mariadb.repo
 MariaDB 10.5 RedHat repository list - created 2021-06-07 05:03 UTC
 http://downloads.mariadb.org/mariadb/repositories/
 [mariadb]
@@ -58,11 +60,12 @@ gpgcheck=1
 [nssf-opm01] root@ /etc/yum.repos.d # yum -y install MariaDB-server MariaDB-client
 
 systemctl enable mariadb, systemctl restart mariadb
-~~~
+```
+
 
 ## 2.2. odbc install
-~~~
-1. yum install unixODBC
+
+```1. yum install unixODBC
 yum install unixODBC-devel
 
 2. tar download
@@ -70,21 +73,21 @@ tar 다운로드 https://downloads.mariadb.com/Connectors/odbc/connector-odbc-3.
 
 
 3. tar zcvf *.tar.gz
-~~~
+```
+
 
 # 3. Setting
 
 ## 3.1. MARAIDB SETTING
-~~~
-$ mysql -u root {PW}
+
+```$ mysql -u root {PW}
 mysql> SELECT Host,User,plugin,authentication_string FROM mysql.user;
 mysql> GRANT ALL PRIVILEGES ON *.* TO '{ID}'@'%' IDENTIFIED BY '{PWD}';
-~~~
+```
 
 ## 3.2. ODBC SETTING
 
-~~~
-[nssf-opm01] root@ /etc # cat odbcinst.ini
+~~~[nssf-opm01] root@ /etc # cat odbcinst.ini
 
 [PostgreSQL]
 Description     = ODBC for PostgreSQL
@@ -128,8 +131,7 @@ PORT=3306
 
 - 프로그램 특성 상 Transaction이 AutoCommit되지 않도록 해야할 때 [SQLSetConnectAttr](https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlsetconnectattr-function?view=sql-server-ver15) 함수에 아래와 같은 옵션을 주어, AutoCommit을 OFF할 수 있다.
 
-~~~
-SQLSetConnectAttr ( *pHdbc , SQL_ATTR_AUTOCOMMIT, **SQL_AUTOCOMMIT_OFF**, 0 ) ;
+~~~SQLSetConnectAttr ( *pHdbc , SQL_ATTR_AUTOCOMMIT, **SQL_AUTOCOMMIT_OFF**, 0 ) ;
 ~~~
 ***
 세션2에서 세션1의 내용을 바꾸면 당연히 세션 1에서 바뀐내용이 적용되어야 한다. 그런데 이 옵션을 사용하면 아래와 같은 문제가 필연적으로 발생한다.
