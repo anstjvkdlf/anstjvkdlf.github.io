@@ -43,12 +43,12 @@ MariaDB-server.x86_64                 10.5.13-1.el7.centos         @mariadb
 
 # 4. Problems
 **4.1. AutoCommit을 OFF로 두었을 때 생기는 문제**
-***
 
 프로그램 특성 상 Transaction이 AutoCommit되지 않도록 해야할 때 [SQLSetConnectAttr](https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlsetconnectattr-function?view=sql-server-ver15) 함수에 아래와 같은 옵션을 주어, AutoCommit을 OFF할 수 있다.
 
+~~~
 SQLSetConnectAttr ( *pHdbc , SQL_ATTR_AUTOCOMMIT, **SQL_AUTOCOMMIT_OFF**, 0 ) ;
-
+~~~
 ***
 이 옵션을 사용하면 아래와 같은 문제가 필연적으로 발생한다.
 
@@ -196,4 +196,45 @@ MariaDB [(none)]> SELECT @@GLOBAL.tx_isolation, @@tx_isolation;
 1 row in set (0.000 sec)
 ~~~
 
-격리 수준이 REPEATABLE READ 일 때, **PHANTOM READ** 현상이 일어날 수 있다.
+격리 수준이 REPEATABLE READ 일 때, Transaction을 제대로 관리 하지 않으면 여러 문제가 일어날 수 있다.
+
+REPEATABLE READ는 아래 그림처럼 Transaction을 ID별로 구분하기 때문에 COMMIT을 제대로 해주지 않는 다면 바뀐 DB내용이 아닌 해당 Transaction ID가 가진 Snapshot 내용을 계속읽게 된다.
+
+![Repeatable Read](.././_img/Repeatable_read.png)
+그림출처: doooyeon.github.io
+
+---
+
+# 5. Solution
+5.1 AutoCommit을 ON 해준다.
+~~~
+SQLSetConnectAttr ( *pHdbc , SQL_ATTR_AUTOCOMMIT, **SQL_AUTOCOMMIT_ON**, 0 ) ;
+~~~
+
+5.2 my.cnf 파일에 설정을 추가해준다.
+~~~
+[mysqld]
+transaction-isolation           = READ-COMMITTED
+~~~
+
+5.3. Transaction 관리를 철저하게 해준다.
+Transaction이 열렸을 때, 항시 commit해서 닫아줄 수 있도록 한다.
+~~~
+SQLRETURN SQLEndTran(  
+     SQLSMALLINT   HandleType,  
+     SQLHANDLE     Handle,  
+     SQLSMALLINT   CompletionType);
+~~~
+*HandleType*
+
+[Input] Handle type identifier. Contains either SQL_HANDLE_ENV (if Handle is an environment handle) or SQL_HANDLE_DBC (if Handle is a connection handle).
+
+*Handle*
+
+[Input] The handle, of the type indicated by HandleType, indicating the scope of the transaction. See "Comments" for more information.
+
+*CompletionType*
+
+[Input] One of the following two values:
+
+SQL_COMMIT SQL_ROLLBACK
