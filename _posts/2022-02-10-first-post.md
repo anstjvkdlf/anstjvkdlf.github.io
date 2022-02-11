@@ -4,9 +4,9 @@ excerpt: "리눅스 버전, MariaDB 버전, ODBC 버전, 환경설정
 설치 시 발생하는 문제점에 관한 자료"
 
 categories:
-  - Blog
+  - Database
 tags:
-  - [Blog, jekyll, Github, Git]
+  - [ODBC, MariaDB, Redhat, Transaction, Mysql, Oracle]
 
 toc: true
 toc_sticky: true
