@@ -21,15 +21,16 @@ last_modified_at: 2020-05-25
 
 ## 1.1 ODBC
 
-```[root@sdm1 ~] yum list installed | grep ODBC
+```console
+[root@sdm1 ~] yum list installed | grep ODBC
 unixODBC.x86_64                       2.3.1-14.el7                 installed
-unixODBC-devel.x86_64                 2.3.1-14.el7                 installed```
-
+unixODBC-devel.x86_64                 2.3.1-14.el7                 installed
+```
 
 
 ## 1.2. MariaDB
 
-```MariaDB-client.x86_64                 10.5.13-1.el7.centos         @mariadb
+```consoleMariaDB-client.x86_64                 10.5.13-1.el7.centos         @mariadb
 MariaDB-common.x86_64                 10.5.13-1.el7.centos         @mariadb
 MariaDB-compat.x86_64                 10.5.13-1.el7.centos         @mariadb
 MariaDB-server.x86_64                 10.5.13-1.el7.centos         @mariadb```
