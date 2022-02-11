@@ -105,12 +105,12 @@ author:
   name             : "Eunsik Lee"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "Software Developer"
-  location         : "판교"
+  location         : "PanGyo"
   email            :
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
-       url: "anstjvkdlf@naver.com"
+       #url: "anstjvkdlf@naver.com"
     - label: "Website"
       icon: "fas fa-fw fa-link"
       # url: "https://your-website.com"
