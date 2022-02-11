@@ -4,9 +4,9 @@ excerpt: "리눅스 버전, MariaDB 버전, ODBC 버전, 환경설정
 설치 시 발생하는 문제점에 관한 자료"
 
 categories:
-  - Database
+  - Blog
 tags:
-  - [ODBC, MariaDB, Redhat, Transaction, Mysql, Oracle]
+  - [ODBC, MariaDB, Redhat, Transaction, Mysql,]
 
 toc: true
 toc_sticky: true
