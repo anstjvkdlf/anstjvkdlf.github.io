@@ -40,7 +40,7 @@ MariaDB-server.x86_64                 10.5.13-1.el7.centos         @mariadb
 
 ## 1.3 Connector
 
-```bat
+```bash
 [root@sdm1 ~]# ll | grep connector
 -rw-r--r--. 1 root root 1991882 Jan 25 15:04 mariadb-connector-odbc-3.1.15-centos7-amd64.tar.gz
 ```
@@ -51,7 +51,7 @@ MariaDB-server.x86_64                 10.5.13-1.el7.centos         @mariadb
 
 - set Mariadb.repo
 
-```shell
+```bash
 [nssf-opm01] root@ /etc/yum.repos.d # vi  Mariadb.repo
 MariaDB 10.5 RedHat repository list - created 2021-06-07 05:03 UTC
 http://downloads.mariadb.org/mariadb/repositories/
@@ -85,14 +85,16 @@ tar 다운로드 https://downloads.mariadb.com/Connectors/odbc/connector-odbc-3.
 
 ## 3.1. MARAIDB SETTING
 
-```$ mysql -u root {PW}
+```bash
+$ mysql -u root {PW}
 mysql> SELECT Host,User,plugin,authentication_string FROM mysql.user;
 mysql> GRANT ALL PRIVILEGES ON *.* TO '{ID}'@'%' IDENTIFIED BY '{PWD}';
 ```
 
 ## 3.2. ODBC SETTING
 
-~~~[nssf-opm01] root@ /etc # cat odbcinst.ini
+~~~bash
+[nssf-opm01] root@ /etc # cat odbcinst.ini
 
 [PostgreSQL]
 Description     = ODBC for PostgreSQL
@@ -136,7 +138,8 @@ PORT=3306
 
 - 프로그램 특성 상 Transaction이 AutoCommit되지 않도록 해야할 때 [SQLSetConnectAttr](https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlsetconnectattr-function?view=sql-server-ver15) 함수에 아래와 같은 옵션을 주어, AutoCommit을 OFF할 수 있다.
 
-~~~SQLSetConnectAttr ( *pHdbc , SQL_ATTR_AUTOCOMMIT, **SQL_AUTOCOMMIT_OFF**, 0 ) ;
+~~~
+SQLSetConnectAttr ( *pHdbc , SQL_ATTR_AUTOCOMMIT, **SQL_AUTOCOMMIT_OFF**, 0 ) ;
 ~~~
 ***
 세션2에서 세션1의 내용을 바꾸면 당연히 세션 1에서 바뀐내용이 적용되어야 한다. 그런데 이 옵션을 사용하면 아래와 같은 문제가 필연적으로 발생한다.
