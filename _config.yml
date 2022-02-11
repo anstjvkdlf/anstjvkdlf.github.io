@@ -19,7 +19,7 @@ locale                   : "en-US"
 title                    : "Bugs Report"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
-name                     : "Eunsik Lee"
+name                     : "Core 1 Team"
 description              : "An amazing website."
 url                      : # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
@@ -102,9 +102,9 @@ analytics:
 
 # Site Author
 author:
-  name             : "Eunsik Lee"
+  name             : "Core 1 Team"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "Software Developer"
+  bio              : "Software Document"
   location         : "PanGyo"
   email            :
   links:
