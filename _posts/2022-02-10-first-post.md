@@ -20,27 +20,31 @@ last_modified_at: 2020-05-25
 # 1. Version Information
 
 ## 1.1 ODBC
-
+~~~
 [root@sdm1 ~]# yum list installed | grep ODBC
 unixODBC.x86_64                       2.3.1-14.el7                 installed
 unixODBC-devel.x86_64                 2.3.1-14.el7                 installed
+~~~
 
 ## 1.2. MariaDB
-
+~~~
 MariaDB-client.x86_64                 10.5.13-1.el7.centos         @mariadb
 MariaDB-common.x86_64                 10.5.13-1.el7.centos         @mariadb
 MariaDB-compat.x86_64                 10.5.13-1.el7.centos         @mariadb
 MariaDB-server.x86_64                 10.5.13-1.el7.centos         @mariadb
+~~~
 
 ## 1.3 Connector
-
+~~~
 [root@sdm1 ~]# ll | grep connector
 -rw-r--r--. 1 root root 1991882 Jan 25 15:04 mariadb-connector-odbc-3.1.15-centos7-amd64.tar.gz
+~~~
 
 # 2. Install
 ## 2.1. [mariadb install]
 
 - set Mariadb.repo
+
 ~~~
 [nssf-opm01] root@ /etc/yum.repos.d # vi  Mariadb.repo
 MariaDB 10.5 RedHat repository list - created 2021-06-07 05:03 UTC
@@ -51,9 +55,9 @@ baseurl = http://yum.mariadb.org/10.5/rhel7-amd64
   gkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
 gpgcheck=1
 
-2. [nssf-opm01] root@ /etc/yum.repos.d # yum -y install MariaDB-server MariaDB-client
+[nssf-opm01] root@ /etc/yum.repos.d # yum -y install MariaDB-server MariaDB-client
 
-3. systemctl enable mariadb, systemctl restart mariadb
+systemctl enable mariadb, systemctl restart mariadb
 ~~~
 
 ## 2.2. odbc install
