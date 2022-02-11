@@ -290,7 +290,7 @@ MariaDB [(none)]> SELECT @@GLOBAL.tx_isolation, @@tx_isolation;
 
 REPEATABLE READ는 아래 그림처럼 Transaction을 ID별로 구분하기 때문에 COMMIT을 제대로 해주지 않는 다면 바뀐 DB내용이 아닌 해당 Transaction ID가 가진 Snapshot 내용을 계속읽게 된다.
 
-![Repeatable Read](img width="739" alt="Repeatable_read" src="https://user-images.githubusercontent.com/18244590/153538744-fb8f0d11-9b8a-429e-95ef-f1c22562f60f.png")
+![Repeatable Read](https://user-images.githubusercontent.com/18244590/153538744-fb8f0d11-9b8a-429e-95ef-f1c22562f60f.png)
 그림출처: doooyeon.github.io
 
 ---
