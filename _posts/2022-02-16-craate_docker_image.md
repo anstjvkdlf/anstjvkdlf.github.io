@@ -14,9 +14,9 @@ date: 2022-02-16
 last_modified_at: 2022-02-16
 ---
 # 1. Ubunutu 환경세팅
-리눅스 환경에서 도커이미지를 말아볼 것이기 때문에, 가상 리눅스 Machine을 띄어준다.
+리눅스 환경에서 도커이미지를 말아볼 것이기 때문에, 가상 리눅스 Machine이 필요하다.
 
-가볍게 Microsoft Store에서 제공하는 우분투를 사용할 수 있음으로 가상 우분투를 다운로드 해준다.
+Microsoft Store에서 제공하는 가상 우분투를 사용해 시험해 본다.
 
 
 ## 1.1 Microsoft Store 우분투 다운
@@ -34,6 +34,9 @@ docker version
 ```
 
 ## 1.3. git으로 소스 가져오기
+아래는 hello-world를 찍는 도커 오피셜 이미지 소스이다.
+
+
 
 ```bash
 les@DESKTOP-1JDHF6J:~/les$ git clone https://github.com/anstjvkdlf/hello-world.git
