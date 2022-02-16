@@ -1,6 +1,6 @@
 ---
 title:  "도커 이미지 말아보기"
-excerpt: "리눅스에서 도커이미지 말아보기"
+excerpt: "WSL2 리눅스에서 도커이미지 말아보기"
 
 categories:
   - Blog
@@ -13,30 +13,90 @@ toc_sticky: true
 date: 2022-02-16
 last_modified_at: 2022-02-16
 ---
-# 1. Ubunutu 환경세팅
+
+# 1. 도커 이미지란?
+
+도커 이미지란 어떤 콘테이너에서도 실행 될 수 있는 이미지를 말한다. 
+
+도커 이미지는 DockerFile을 이용해서 생성할 수 있고, 지금부터는 Hello-World를 찍는 도커 이미지를 말아본다. 그리고 그 이미지를 컨테이너에 올려보는 실습을 진행한다.
+
+
+# 2. 리눅스 환경세팅
 리눅스 환경에서 도커이미지를 말아볼 것이기 때문에, 가상 리눅스 Machine이 필요하다.
 
 Microsoft Store에서 제공하는 가상 우분투를 사용해 시험해 본다.
 
 
-## 1.1 Microsoft Store 우분투 다운
-이미지 ㅇㅇ
+## 2.1 Microsoft Store 우분투 다운
+### 2.1.1. 먼저 WLS을 WLS2로 업그레이드 해 주어야 함
+자세한 이유는 [여기](https://blog.naver.com/PostView.nhn?blogId=ilikebigmac&logNo=222007741507) 정리되어 있으니 궁금하면 읽어보면 좋을 듯 하다.
 
-## 1.2. Docker 설치
-아래 스크립트를 실행하면 도커 설치가 진행된다.
+powerShell에서
 ```bash
-sudo wget -qO- http://get.docker.com/ | sh
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+```
+```bash
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+```
+입력한 후 시스템을 재부팅 해준다.
+
+재부팅 했다면 WSL2를 기본으로 설정해준다.
+```bash
+wsl --set-version Ubuntu 2
 ```
 
-아래 스크립트를 실행하여 정상 설치 되었는지 확인한다.
+### 2.1.2. 우분투 설치
+
+
+## 2.2. Docker 설치
+패키지 설치
 ```bash
-docker version
+sudo apt-get update && sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    software-properties-common
 ```
 
-## 1.3. git으로 소스 가져오기
+GPG Key 추가
+```bash
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+```
+Repositary 추가
+```bash
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+```
+
+패키지 정상설치 확인
+```bash
+sudo apt-get update && sudo apt-cache search docker-ce
+```
+
+도커 설치
+```bash
+sudo apt-get update && sudo apt-get install docker-ce
+```
+
+사용자 추가
+```bash
+sudo usermod -aG docker $USER
+```
+
+설치확인
+```bash
+sudo docker --version
+```
+## 1.3. git으로 말아볼 소스 가져오기
 아래는 hello-world를 찍는 도커 오피셜 이미지 소스이다.
 
 
+
+```bash
+git clone https://github.com/anstjvkdlf/hello-world.git
+```
 
 ```bash
 les@DESKTOP-1JDHF6J:~/les$ git clone https://github.com/anstjvkdlf/hello-world.git
@@ -51,14 +111,26 @@ les@DESKTOP-1JDHF6J:~/les$
 les@DESKTOP-1JDHF6J:~/les$
 ```
 
-## 1.3 DockerFile을 이용해 이미지 말기
+# 3. Dockerfile을 이용해 이미지 말기
+
+## 3.1 소스 컴파일
 
 ```bash
-[root@sdm1 ~]# ll | grep connector
--rw-r--r--. 1 root root 1991882 Jan 25 15:04 mariadb-connector-odbc-3.1.15-centos7-amd64.tar.gz
+gcc -o hello_docker hello.c
 ```
 
+## 3.2. DockerFile 작성
+```bash
+vi Dockerfile
 
+FROM ubuntu:latest
+
+COPY ./hello_docker /
+
+CMD ["./hello_docker"]
+```
+
+## 3.3. 
 # 2. Install
 ## 2.1. [mariadb install]
 
