@@ -17,21 +17,29 @@ last_modified_at: 2022-02-16
 # 1. 도커 이미지란?
 
 도커 이미지는 어떤 콘테이너에서도 실행 될 수 있습니다.
-무슨뜻인가 하면 도커이미지를 구웠던 환경이 우분투에서 구웠든, RedHat에서 구웠든 상관없이 말기만 하면 쿠버네티스에서 띄울 수 있다는 겁니다. 이 실습은 리눅스에서 도커 이미지는 말고 OKD(쿠버네티스) 환경에서 띄어보는 실습입니다.
+무슨뜻인가 하면 도커이미지를 구웠던 환경이 우분투에서 구웠든, RedHat에서 구웠든 상관없이 말기만 하면 쿠버네티스에서 띄울 수 있다는 겁니다. 이 실습은 리눅스에서 도커 이미지를 말아서 OKD(쿠버네티스) 환경에서 띄어보는 실습입니다.
 
-실습 후에 도커 이미지가 무엇이고, 쿠버네티스 환경의 컨테이너에서 어떻게 이미지가 떠있는지 그림을 그릴 수 있으면 됩니다.
+실습 후에 도커 이미지가 무엇이고, 쿠버네티스 환경의 컨테이너에서 어떻게 내가 만든 이미지가 떠있는지 그림을 그릴 수 있으면 됩니다.
 
 # 2. 리눅스 환경세팅
-리눅스 환경에서 도커이미지를 말아볼 것이기 때문에, 가상 리눅스 Machine이 필요하다.
+리눅스 환경에서 도커이미지를 말아볼 것이기 때문에, 가상 리눅스 Machine이 필요합니다.
 
-Microsoft Store에서 제공하는 가상 우분투를 사용해 시험해 본다.
+Microsoft Store에서 제공하는 가상 우분투를 사용해 시험해 보도록 하겠습니다.
+
 
 
 ## 2.1 Microsoft Store 우분투 다운
-### 2.1.1. 먼저 WLS을 WLS2로 업그레이드 해 주어야 함
-자세한 이유는 [여기](https://blog.naver.com/PostView.nhn?blogId=ilikebigmac&logNo=222007741507) 정리되어 있으니 궁금하면 읽어보면 좋을 듯 하다.
+MS에서도 WSL을 이용한 가상 리눅스를 제공하고 있습니다.
 
-powerShell에서
+### 2.1.1 우분투 설치
+![Microsoft Store Ubuntu](https://user-images.githubusercontent.com/18244590/154407931-2a356987-6aaf-4c68-a808-ccaa02a09108.PNG)
+
+Microsoft에서 제공하는 VM입니다. 설치 후 WLS관련하여 세팅이 필요합니다.
+
+### 2.1.1. WSL 버전 업그레이드
+MS에서 제공하는 우분투에서 도커를 사용하기 위해서는 WSL2를 사용하는게 마음 폅합니다. 자세한 이유는 [여기](https://blog.naver.com/PostView.nhn?blogId=ilikebigmac&logNo=222007741507) 정리되어 있으니 궁금하면 읽어보면 좋을 듯 합니다.
+
+powerShell에서 다음 2 줄을 입력해 줍니다.
 ```bash
 dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 ```
@@ -39,15 +47,12 @@ dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux 
 ```bash
 dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 ```
-입력한 후 시스템을 재부팅 해준다.
+입력한 후 시스템을 재부팅.
 
-재부팅 했다면 WSL2를 기본으로 설정해준다.
+재부팅 했다면 아래 명령으로 WSL2를 기본으로 설정.
 ```bash
 wsl --set-version Ubuntu 2
 ```
-
-### 2.1.2. 우분투 설치
-
 
 ## 2.2. Docker 설치
 패키지 설치
@@ -101,15 +106,17 @@ sudo service docker start
 apt-get remove docker docker-engine docker.io
 ```
 ---
-## 1.3. git으로 말아볼 소스 가져오기
-아래는 hello-world를 찍는 도커 오피셜 이미지 소스이다.
+## 1.3. git으로 말아 볼 소스 가져오기
+아래는 hello-world를 찍는 도커 오피셜 이미지 소스입니다.
 
+git에서 땡겨 오도록 합니다.
 
 
 ```bash
 git clone https://github.com/anstjvkdlf/hello-world.git
 ```
 
+땡겨오는 중.
 ```bash
 les@DESKTOP-1JDHF6J:~/les$ git clone https://github.com/anstjvkdlf/hello-world.git
 Cloning into 'hello-world'...
@@ -124,15 +131,19 @@ les@DESKTOP-1JDHF6J:~/les$
 ```
 
 # 3. Dockerfile을 이용해 이미지 말기
-
 ## 3.1 소스 컴파일
 
 ```bash
 gcc -o hello_docker hello.c
 ```
 
+~~gcc가 없다면 gcc 설치~~
+```bash
+sudo apt-get install gcc
+```
+
 ## 3.2. DockerFile 작성
-도커 이미지는 DockerFile을 이용해서 생성할 수 있고, Dockerfile은 Makefile과 비슷하다고 생각하면 이해가 편하다. 
+도커 이미지는 DockerFile을 이용해서 생성할 수 있고, Dockerfile은 Makefile과 비슷하다고 생각하면 이해가 편합니다.
 
 ```bash
 vi Dockerfile
@@ -145,10 +156,10 @@ CMD ["./hello_docker"]
 ```
 
 ## 3.3. 이미지 빌드
-아래 명령어를 실행해서 이미지를 빌드 해준다.
-
+아래 명령어를 실행해서 이미지를 빌드.
+~~tag명 잘 설정해줄 것~~
 ```bash
-docker build --tag new-hello-world .
+docker build --tag les-hello-world .
 ```
 
 ## 3.4. 실행
@@ -188,12 +199,106 @@ For more examples and ideas, visit:
  ```
 
 # 4. 이미지 OKD(쿠버네티스)에 올리기
-## 4.1. 이미지 Save
-OKD에 올라갈 때는 tar파일로 올라가야 한다.
+Docker에서 생성한 이미지를 이제 OKD로 올려보겠습니다.
 
-docker save 명령어로 이미지를 묶어준다.
+## 4.1. 이미지 Save
+OKD에 올라갈 때는 tar파일로 올라가야 합니다.
+
+docker save 명령어로 이미지를 tar파일로 묶어준다.
 ```bash
-docker save -o new-hello-world.tar new-hello-world:latest
+docker save -o les-hello-world.tar les-hello-world:latest
 ```
 
-scp, sftp등 파일전송 스크립트를 이용해서 bastion으로 tar 파일을 전송해준다.
+## 4.2 이미지 bastion 전송
+묶은 이미지 파일을 scp, sftp등의 스크립트를 이용해서 bastion으로 전송해줍니다.
+
+# 5. bastion -> OKD 이미지 loading
+bastion에 접속해줍니다.
+
+* bastion 서버에 로그인.
+```bash
+oc login
+```
+
+* namespace를 core1로 이동해줍니다.
+
+~~다른 프로젝트라면 core1대신 다른 이름을 적어주면 됩니다.~~
+```bash
+oc project core1
+```
+
+* 아래 명령들을 쳐줍니다.
+```bash
+oc registry login
+
+podman load -i ./les-hello-world.tar
+
+podman tag localhost/les-hello-world:latest default-route-openshift-image-registry.apps.eluon.okd.com/core1/les-hello-world:latest
+
+podman push default-route-openshift-image-registry.apps.eluon.okd.com/core1/new-hello-world:latest
+
+podman images
+```
+
+* 결과
+```bash
+OKD4.5 [root@bastion01:/root/core1] $ podman load -i ./les-hello-world.tar
+Getting image source signatures
+Copying blob e54a4cabb64f [--------------------------------------] 0.0b / 0.0b
+Copying config 00d17f0873 done
+Writing manifest to image destination
+Storing signatures
+Loaded image(s): localhost/les-hello-world:latest
+
+OKD4.5 [root@bastion01:/root/core1] $ podman images | grep 'les'
+localhost/les-hello-world                                                                   latest                      00d17f08738d   3 hours ago     75.2 MB
+
+OKD4.5 [root@bastion01:/root/core1] $ podman tag localhost/les-hello-world:latest default-route-openshift-image-registry.apps.eluon.okd.com/core1/les-hello-world:latest
+
+OKD4.5 [root@bastion01:/root/core1] $ podman push default-route-openshift-image-registry.apps.eluon.okd.com/core1/les-hello-world:latest
+Getting image source signatures
+Copying blob e54a4cabb64f done
+Copying blob 36ffdceb4c77 skipped: already exists
+Copying config 00d17f0873 done
+Writing manifest to image destination
+Storing signatures
+
+```
+![image_stream](https://user-images.githubusercontent.com/18244590/154412001-e4239607-33db-450d-98f1-dc3c9047c9d4.PNG)
+
+* 이미지 스트림을 pod에 올릴 때 필요한 설정들을 yaml 파일을 통해서 해줍니다.
+
+~~vi pod2.yaml~~
+```bash
+apiVersion: v1
+kind: Pod
+metadata:
+  name: les-hello-world-pod
+  namespace: core1
+spec:
+  restartPolicy: Always
+  nodeSelector:
+    kubernetes.io/hostname: vm-worker01.eluon.okd.com
+  containers:
+    - image: image-registry.openshift-image-registry.svc:5000/core1/les-hello-world:latest
+      imagePullPolicy: Always
+      name: my-hello-world-container
+      command: ["/bin/bash", "-c", "sleep inf"]
+      securityContext: { privileged: true }
+      volumeMounts:
+      - mountPath: /data
+        name: test-volume-core1
+  volumes:
+  - name: test-volume-core1
+    hostPath:
+      path: /opt/volume/test-volume-core1
+      type: DirectoryOrCreate
+```
+
+* pod(컨테이너)를 생성해줍니다.
+```bash
+oc create -f pod3.yaml
+```
+
+* 대쉬보드에서 pod 상태를 확인 합니다.
+![pods](https://user-images.githubusercontent.com/18244590/154412371-aab14453-5287-40ff-bcf7-5ca4c9be86db.PNG)
