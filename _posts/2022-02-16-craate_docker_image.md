@@ -16,10 +16,10 @@ last_modified_at: 2022-02-16
 
 # 1. 도커 이미지란?
 
-도커 이미지란 어떤 콘테이너에서도 실행 될 수 있는 이미지를 말한다. 
+도커 이미지는 어떤 콘테이너에서도 실행 될 수 있다.
+이미지를 우분투에서 구웠든, RedHat에서 구웠든 간에 상관이 없다. 이 실습은 우분투에서 도커 이미지는 말아서 OKD(쿠버네티스) 환경에서 띄어보는 실습이다.
 
-도커 이미지는 DockerFile을 이용해서 생성할 수 있고, 지금부터는 Hello-World를 찍는 도커 이미지를 말아본다. 그리고 그 이미지를 컨테이너에 올려보는 실습을 진행한다.
-
+도커 이미지는 DockerFile을 이용해서 생성할 수 있고, Dockerfile은 Makefile과 비슷하다고 생각하면 이해가 편하다. 
 
 # 2. 리눅스 환경세팅
 리눅스 환경에서 도커이미지를 말아볼 것이기 때문에, 가상 리눅스 Machine이 필요하다.
@@ -89,6 +89,12 @@ sudo usermod -aG docker $USER
 ```bash
 sudo docker --version
 ```
+
+~~Docker 삭제~~
+```bash
+apt-get remove docker docker-engine docker.io
+```
+---
 ## 1.3. git으로 말아볼 소스 가져오기
 아래는 hello-world를 찍는 도커 오피셜 이미지 소스이다.
 
