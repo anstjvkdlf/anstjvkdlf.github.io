@@ -26,6 +26,7 @@ last_modified_at: 2022-02-16
 
 ![docker_image](https://user-images.githubusercontent.com/18244590/154414807-1d1005d7-c6d3-4c0f-b2b3-8c42d10869f2.png)
 
+
 # 2. 리눅스 환경세팅
 리눅스 환경에서 도커이미지를 말아볼 것이기 때문에, 가상 리눅스 Machine이 필요합니다.
 
