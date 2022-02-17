@@ -234,9 +234,9 @@ oc registry login
 
 podman load -i ./les-hello-world.tar
 
-podman tag localhost/les-hello-world:latest default-route-openshift-image-registry.apps.eluon.okd.com/core1/les-hello-world:latest
+podman tag localhost/les-hello-world:latest default-route-openshift-image-registry.apps.**********.okd.com/core1/les-hello-world:latest
 
-podman push default-route-openshift-image-registry.apps.eluon.okd.com/core1/new-hello-world:latest
+podman push default-route-openshift-image-registry.apps.**********.okd.com/core1/new-hello-world:latest
 
 podman images
 ```
@@ -254,9 +254,9 @@ Loaded image(s): localhost/les-hello-world:latest
 OKD4.5 [root@bastion01:/root/core1] $ podman images | grep 'les'
 localhost/les-hello-world                                                                   latest                      00d17f08738d   3 hours ago     75.2 MB
 
-OKD4.5 [root@bastion01:/root/core1] $ podman tag localhost/les-hello-world:latest default-route-openshift-image-registry.apps.eluon.okd.com/core1/les-hello-world:latest
+OKD4.5 [root@bastion01:/root/core1] $ podman tag localhost/les-hello-world:latest default-route-openshift-image-registry.apps.**********.okd.com/core1/les-hello-world:latest
 
-OKD4.5 [root@bastion01:/root/core1] $ podman push default-route-openshift-image-registry.apps.eluon.okd.com/core1/les-hello-world:latest
+OKD4.5 [root@bastion01:/root/core1] $ podman push default-route-openshift-image-registry.apps.**********.okd.com/core1/les-hello-world:latest
 Getting image source signatures
 Copying blob e54a4cabb64f done
 Copying blob 36ffdceb4c77 skipped: already exists
@@ -281,7 +281,7 @@ metadata:
 spec:
   restartPolicy: Always
   nodeSelector:
-    kubernetes.io/hostname: vm-worker01.eluon.okd.com
+    kubernetes.io/hostname: vm-worker01.**********.okd.com
   containers:
     - image: image-registry.openshift-image-registry.svc:5000/core1/les-hello-world:latest
       imagePullPolicy: Always
