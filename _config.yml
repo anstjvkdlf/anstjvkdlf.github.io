@@ -104,7 +104,8 @@ analytics:
 author:
   name             : "Core Team"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "Software Document"
+  bio              : "Software Document
+  우측 상단에서 소스코드 접근이 가능합니다. 잘못된 내용이나 추가할 내용 자유롭게 추가 가능합니다."
   location         : "PanGyo, Korea"
   email            :
   links:
