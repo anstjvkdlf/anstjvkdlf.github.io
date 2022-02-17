@@ -48,7 +48,6 @@ powerShell에서 다음 2 줄을 입력해 줍니다.
 ```bash
 dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 ```
-그리고
 ```bash
 dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 ```
@@ -215,8 +214,7 @@ docker save -o les-hello-world.tar les-hello-world:latest
 ## 4.2 이미지 bastion 전송
 묶은 이미지 파일을 scp, sftp등의 스크립트를 이용해서 bastion으로 전송해줍니다.
 
-# 5. bastion -> OKD 이미지 loading
-bastion에 접속해줍니다.
+# 5. 이미지 loading
 
 bastion 로그인.
 ```bash
