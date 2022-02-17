@@ -111,7 +111,7 @@ sudo service docker start
 apt-get remove docker docker-engine docker.io
 ```
 ---
-## 1.3. git으로 말아 볼 소스 가져오기
+## 2.3. git으로 말아 볼 소스 가져오기
 아래는 hello-world를 찍는 도커 오피셜 이미지 소스입니다.
 
 git에서 땡겨 오도록 합니다.
