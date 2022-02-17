@@ -32,7 +32,6 @@ Microsoft Store에서 제공하는 가상 우분투를 사용해 시험해 본�
 자세한 이유는 [여기](https://blog.naver.com/PostView.nhn?blogId=ilikebigmac&logNo=222007741507) 정리되어 있으니 궁금하면 읽어보면 좋을 듯 하다.
 
 powerShell에서
-{% include codeHeader.html %}
 ```bash
 dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 ```
