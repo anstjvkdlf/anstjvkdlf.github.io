@@ -1,6 +1,6 @@
 ---
 title: "ABOUT ME"
-layout: categories
+layout: archive
 permalink: /about_me/
 author_profile: true
 ---
