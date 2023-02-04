@@ -1,3 +1,10 @@
+---
+title: "ABOUT ME"
+layout: categories
+permalink: /about_me
+author_profile: true
+---
+
 # Test
 
 # 1. 도커 이미지란?
