@@ -1,6 +1,6 @@
 ---
 permalink: /aboutme/
-layout : single
+layout : profile
 ---
 
 # 1. Experience
