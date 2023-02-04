@@ -4,7 +4,8 @@ title: "ABOUT ME"
 permalink: /aboutme/
 
 date: '2023-02-24'
-category: jekyll
+categories:
+    - Jekyll
 ---
 
 # 1. Experience
