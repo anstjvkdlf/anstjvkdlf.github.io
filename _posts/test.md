@@ -1,6 +1,6 @@
 ---
 title: "ABOUT ME"
-permalink: /aboutme/
+#permalink: /aboutme/
 ---
 
 # 1. Experience

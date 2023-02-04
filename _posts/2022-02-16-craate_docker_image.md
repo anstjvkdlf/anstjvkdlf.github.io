@@ -1,7 +1,7 @@
 ---
 title:  "도커 이미지 말아보기"
 excerpt: "WSL2 리눅스에서 도커이미지 말아보기"
-
+permalink: /aboutme/
 categories:
   - Blog
 tags:
