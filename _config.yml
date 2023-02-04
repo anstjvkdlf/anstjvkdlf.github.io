@@ -16,11 +16,11 @@ minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt"
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Bugs Report"
+title                    : "Slow but steady"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
-name                     : "Core 1 Team"
-description              : "An amazing website."
+name                     : "Eunsik Lee"
+description              : "anstjvkdlf@naver.com"
 url                      : # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
@@ -104,9 +104,9 @@ analytics:
 
 # Site Author
 author:
-  name             : "Core Team"
-  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "우측 상단 Source_code버튼 클릭 시, 소스코드 접근이 가능합니다. 잘못된 내용이나 추가할 내용 자유롭게 추가 가능합니다."
+  name             : "Eunsik Lee"
+  avatar           : "/assets/images/bio-photo.jpg"
+  bio              : "경력사항"
   location         : "PanGyo, Korea"
   email            :
   links:
