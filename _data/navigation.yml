@@ -2,8 +2,8 @@
 main:
   - title: "About"
     url: https://github.com/anstjvkdlf/anstjvkdlf.github.io
-  - title: "About me"
-     url: /about_me
+  #- title: "About me"
+  #   url: /about_me
   # - title: "Sample Posts"
   #   url: /year-archive/
   # - title: "Sample Collections"
