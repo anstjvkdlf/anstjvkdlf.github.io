@@ -1,7 +1,7 @@
 ---
 title: "ABOUT ME"
-#layout: categories
-permalink: /about_me
+layout: categories
+permalink: /about_me/
 author_profile: true
 ---
 
