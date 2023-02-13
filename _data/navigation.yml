@@ -25,7 +25,7 @@ main:
     url: /aboutme/
 
 # documentation links
-docs:
+posts:
   - title: Getting Started
     children:
       - title: "Quick-Start Guide"
