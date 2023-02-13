@@ -13,9 +13,6 @@ toc_sticky: true
 date: 2022-02-16
 last_modified_at: 2022-02-16
 
-sidebar:
-  title: "Quick-Start Guide"
-  nav: sidebar-sample
 ---
 
 # 1. 도커 이미지란?

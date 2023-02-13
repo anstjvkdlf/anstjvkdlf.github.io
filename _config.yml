@@ -279,27 +279,16 @@ compress_html:
 
 # Defaults
 defaults:
-  # _posts
-  # - scope:
-  #     path: ""
-  #     type: posts
-  #   values:
-  #     layout: single
-  #     author_profile: true
-  #     read_time: true
-  #     comments: # true
-  #     share: true
-  #     related: true
-  # _docs
+  _posts
   - scope:
       path: ""
       type: posts
     values:
       layout: single
-      read_time: false
       author_profile: true
-      share: false
-      comments: false
+      read_time: true
+      comments: # true
+      share: true
+      related: true
       sidebar:
         nav: "posts"
-
