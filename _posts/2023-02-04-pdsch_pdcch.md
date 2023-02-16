@@ -53,7 +53,7 @@ For example, to find PDSCH area we should look at PDCCH area first which contain
 
 Furthermore I guess you can naturally understand why PDCCH is starting from first symbol.
 
-#
+---
 ### 1.1.3. Parameter
 There is three significant parameter in PDCCH.
 
@@ -69,7 +69,7 @@ For example when startSymbolSet is set to [0] which means monitoringSymbolWithIn
 
 
 ## 1.2 PDSCH (Physical Downlink Shared Channel)
-#
+---
 ### 1.2.1. Allocation
 This concept is also simple.
 
@@ -81,11 +81,11 @@ Let's look at the picture again. &darr;
 
 
 
-Turquoise area is PDSCH area. This area was allocated by DCI.
+Turquoise area is PDSCH area. This area was scheduled by DCI.
 
 It starts right after where PDCCH ends.
 
-#
+---
 ### 1.2.2. Concept
 PDSCH exists to send user data.
 
@@ -93,7 +93,7 @@ UE try to find PDSCH are using DCI which was carried in PDCCH.
 
 You are done. That is PDSCH.
 
-#
+---
 ### 1.1.3. Parameter
 There is one significant parameter in PDSCH.
 
