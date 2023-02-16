@@ -18,6 +18,7 @@ last_modified_at: 2022-02-16
 # 1. 5G Downlink Channel
 
 ## 1.1 PDCCH (Physical Downlink Control Channel)
+---
 ### 1.1.1. Allocation
 This concept is very simple. Don't be afraid, believe me.
 
@@ -38,9 +39,9 @@ You are done.
 
 That's all.
 
-#
+---
 ### 1.1.2. Concept
-Why did we decided to use that amount of radio resource?
+Why did we decided to use that amount of radio resource for PDCCH?
 
 The reason is to carry [DCI](). I recommand to read what is DCI firstly.
 
