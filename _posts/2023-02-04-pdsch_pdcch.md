@@ -99,9 +99,9 @@ There is one significant parameter in PDSCH.
 
 SLIV : This parameter is integer. It represent where PDSCH start and how many symbol does PDSCH is using.
 
-![image](https://user-images.githubusercontent.com/18244590/219415691-c8fda778-32c7-4271-aecf-e36d403aeb56.png)
+![image](https://user-images.githubusercontent.com/18244590/219418144-f0f6a04c-2179-4e24-9886-d853abfd07f3.png)
 
 For example when startSymbolSet is set to [0] which means monitoringSymbolWithInSlot is set to "1000 0000 0000 00". And if duration is 3 this can be illustrated as picture I've attach above(yellow area).
-This means that PDSCH will be start from starting Symbol 3.
+This means that PDSCH will be start from starting Symbol 3 because 0,1,2 is reserved by PDCCH.
 
-PDSCH is using 8 symbol, so we can choose 101 as SLIV value.
+PDSCH is using 8 symbol(3~11), so we can choose 94 as SLIV value.
