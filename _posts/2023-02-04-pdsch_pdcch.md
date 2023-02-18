@@ -1,6 +1,7 @@
 ---
 title:  "5G Network Channel(Downlink)"
 excerpt: "Comprehand 5G downlink channel"
+permalink: /pdcch_pdsch/
 
 categories:
   - cellular network

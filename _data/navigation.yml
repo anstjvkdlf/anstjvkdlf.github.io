@@ -29,7 +29,7 @@ posts:
   - title: Cellular Network
     children:
       - title: "3GPP"
-        url: /docs/quick-start-guide/
+        url: /pdcch_pdsch/
       - title: "Common"
         url: /docs/structure/
   - title: Computer science
