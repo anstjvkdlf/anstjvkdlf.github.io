@@ -28,10 +28,10 @@ main:
 posts:
   - title: Cellular Network
     children:
-      - title: "3GPP"
+      - title: "5G Channel"
         url: /pdcch_pdsch/
-      - title: "Common"
-        url: /docs/structure/
+      - title: "Carrier Aggregation"
+        url: /ca/
   - title: Computer science
     children:
       - title: "C++"
