@@ -32,6 +32,8 @@ posts:
         url: /pdcch_pdsch/
       - title: "Carrier Aggregation"
         url: /ca/
+      - title: "CA detail"
+        url: /ca_detail/
   - title: Computer science
     children:
       - title: "C++"
