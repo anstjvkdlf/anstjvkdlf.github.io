@@ -16,7 +16,7 @@ last_modified_at: 2022-03-19
 ---
 
 # 1. gNB
-In my defination, gNB is server receiving data from client.
+In my defination, gNB is just a server receiving data from client.
 
 We called client as "UE" in telecommunication field.
 
