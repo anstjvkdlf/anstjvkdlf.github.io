@@ -34,11 +34,13 @@ posts:
         url: /ca/
       - title: "CA detail"
         url: /ca_detail/
-  - title: Computer science
-    children:
-      - title: "C++"
-        url: /docs/configuration/
-      - title: "Git"
-        url: /docs/overriding-theme-defaults/
-      - title: "data science"
-        url: /docs/navigation/
+      - title: "gNB and UE"
+        url: /ue_detail/        
+  # - title: Computer science
+  #   children:
+  #     - title: "C++"
+  #       url: /docs/configuration/
+  #     - title: "Git"
+  #       url: /docs/overriding-theme-defaults/
+  #     - title: "data science"
+  #       url: /docs/navigation/
