@@ -1,7 +1,7 @@
 ---
 title:  "gNB architecture"
 excerpt: "Carreier aggregation detail"
-permalink: /ca_detail/
+permalink: /ue_detail/
 
 categories:
   - cellular network
