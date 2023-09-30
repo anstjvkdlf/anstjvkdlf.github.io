@@ -21,7 +21,7 @@ last_modified_at: 2022-02-16
 ## 1.1 PDCCH (Physical Downlink Control Channel)
 ---
 ### 1.1.1. Allocation
-This concept is very simple. Don't be afraid, believe me.
+This concept is very simple.
 
 PDCCH is dowlink channel in PHY layer.
 
@@ -33,8 +33,6 @@ It looks like this &darr;
 Yellow area is PDCCH area. It is located within CORESET.
 
 You don't have to know what is CORESET here, just remind that PDCCH is located at specific area called CORESET.
-
-You are done.
 
 **PDCCH is just pre-allocated radio resource within CORESET.**
 
@@ -48,15 +46,15 @@ The reason is to carry [DCI](). I recommand to read what is DCI firstly.
 
 Very breifly, DCI is used to schedule downlink channel and uplink channel.
 
-By putting DCI at front slot, we can know how slot looks like.
+By putting DCI at front slot, we can know how whole slot looks like.
 
 For example, to find PDSCH area we should look at PDCCH area first which contains DCI.
 
-Furthermore I guess you can naturally understand why PDCCH is starting from first symbol.
+Futhermore I guess you can naturally understand why PDCCH is starting from first symbol.
 
 ---
 ### 1.1.3. Parameter
-There is three significant parameter in PDCCH.
+There are three significant parameters in PDCCH.
 
 monitoringSymbolWithInSlot : This parameter is 14 bits string. It represents 1 slot. When it is set to "1000 0000 0000 00" it means PDCCH starts at first Symbol.
 
@@ -72,7 +70,7 @@ For example when startSymbolSet is set to [0] which means monitoringSymbolWithIn
 ## 1.2 PDSCH (Physical Downlink Shared Channel)
 ---
 ### 1.2.1. Allocation
-This concept is also simple.
+This concept is simple.
 
 PDSCH is dowlink channel in PHY layer.
 

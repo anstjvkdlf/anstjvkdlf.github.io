@@ -16,14 +16,14 @@ last_modified_at: 2022-03-19
 ---
 
 # 1. gNB
-In my defination, gNB is just a server receiving data from client.
+gNB is kind of server receiving data from client.
 
-We called client as "UE" in telecommunication field.
+We call client as "UE" in telecommunication field.
 
 ## 1.1. gNB architecture
-As like other server, gNB is also seperated into three components.
+gNB is seperated into three components.
 
-Each component has its role.
+Each component has its own role.
 
 Very simply,
 - DU is unit welcoming UE.
